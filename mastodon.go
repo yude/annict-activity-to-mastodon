@@ -19,7 +19,7 @@ func PostToMastodon(toot string) error {
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusCreated {
-		b, err := io.ReadAll(res.Body)
+		_, err := io.ReadAll(res.Body)
 		if err != nil {
 			return errors.New("failed to retrieve error")
 		}
