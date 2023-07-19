@@ -3,9 +3,18 @@ package main
 import "time"
 
 type CredentialsConfig struct {
-	AnnictKey      string `toml:"annict_key"`
-	AnnictUsername string `toml:"annict_username"`
-	TwitterBearer  string `toml:"twitter_bearer_token"`
+	AnnictCredentials   `toml:"annict"`
+	MastodonCredentials `toml:"mastodon"`
+}
+
+type AnnictCredentials struct {
+	AnnictKey      string `toml:"key"`
+	AnnictUsername string `toml:"username"`
+}
+
+type MastodonCredentials struct {
+	MastodonUrl   string `toml:"domain"`
+	MastodonToken string `toml:"access_token"`
 }
 
 type Config struct {

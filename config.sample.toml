@@ -1,3 +1,7 @@
-[credentials]
-annict_key = ""
-annict_username = ""
+[credentials.annict]
+key = ""
+username = ""
+
+[credentials.mastodon]
+domain = "https://mastodon.social"
+access_token = ""

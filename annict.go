@@ -10,17 +10,17 @@ import (
 
 func fetch_annict() (*AnnictActivity, error) {
 	// Parse config.toml
-	conf, err := NewConfig()
-	if err != nil {
-		log.Fatal("Error: Failed to parse config.toml")
-	}
+	conf := GetConfig()
 
-	url := "https://api.annict.com/v1/activities?access_token=" + conf.Credentials.AnnictKey + "&sort_id=desc&filter_username=" + conf.Credentials.AnnictUsername + "&per_page=10"
+	url := "https://api.annict.com/v1/activities?access_token=" + conf.Credentials.AnnictCredentials.AnnictKey + "&sort_id=desc&filter_username=" + conf.Credentials.AnnictCredentials.AnnictUsername + "&per_page=10"
 
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Print("Error: Failed to retrieve data from Annict's API.", err)
 		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		log.Print("Warning: API returned non-200 code. (", resp.StatusCode, ")")
 	}
 	defer resp.Body.Close()
 	byteArray, _ := ioutil.ReadAll(resp.Body)
@@ -28,7 +28,8 @@ func fetch_annict() (*AnnictActivity, error) {
 	jsonBytes := ([]byte)(byteArray)
 	data := new(AnnictActivity)
 	if err := json.Unmarshal(jsonBytes, data); err != nil {
-		log.Print("Warning: Failed to parse Annict's JSON", err)
+		log.Print("Warning: Failed to parse Annict's JSON: ", err)
+		log.Println("Raw response: ", data)
 		return data, err
 	}
 
@@ -36,11 +37,7 @@ func fetch_annict() (*AnnictActivity, error) {
 }
 
 func format_data(data []AnnictActivityBody) []string {
-	// Parse config.toml
-	conf, err := NewConfig()
-	if err != nil {
-		log.Fatal("Error: Failed to parse config.toml")
-	}
+	conf := GetConfig()
 
 	var texts []string
 
