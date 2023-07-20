@@ -23,7 +23,7 @@ func main() {
 	log.Printf("   %s (UTC) 以降のアクティビティを Mastodon に投稿します。\n", last_updated.Format("2006/1/2 15:04:05"))
 
 	c := cron.New()
-	c.AddFunc("@every 5s", func() {
+	c.AddFunc("@every 15m", func() {
 		data, err := fetch_annict()
 		if err != nil {
 			log.Fatal("Error: Something went wrong. Skipping the tasks.")
