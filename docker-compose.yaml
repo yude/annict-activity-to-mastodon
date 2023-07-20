@@ -1,0 +1,13 @@
+services:
+  200ok:
+    image: ghcr.io/yude/annict-activity-to-mastodon:master
+    build:
+      context: app
+      dockerfile: ./Dockerfile
+    restart: always
+    environment:
+      TZ: "Asia/Tokyo"
+    volumes:
+      - type: bind
+        source: ./config.toml
+        target: /app/config.toml
