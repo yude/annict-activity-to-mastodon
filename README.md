@@ -1,6 +1,6 @@
-# annict-twitter-proxy
+# annict-activity-to-mastodon
 
-WIP
+Annict のアクティビティを Mastodon に投稿するボット
 
 ## License
 
