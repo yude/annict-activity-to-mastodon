@@ -1,4 +1,4 @@
-module github.com/yude/annict-twitter-proxy
+module github.com/yude/annict-activity-to-mastodon
 
 go 1.20
 
