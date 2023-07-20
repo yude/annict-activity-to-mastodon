@@ -1,5 +1,5 @@
 services:
-  200ok:
+  app:
     image: ghcr.io/yude/annict-activity-to-mastodon:master
     build:
       context: app
