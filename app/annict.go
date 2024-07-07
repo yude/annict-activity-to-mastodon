@@ -58,12 +58,12 @@ func format_data(data []AnnictActivityBody) []string {
 				case "watched":
 					status_kind_fmt = "見た"
 				case "on_hold":
-					status_kind_fmt = "視聴中断"
+					status_kind_fmt = "一時中断"
 				case "stop_watching":
 					status_kind_fmt = "視聴中止"
 				}
 
-				texts = append(texts, fmt.Sprintf("%s の視聴ステータスを「%s」にしました https://annict.com/%s/%s", data[i].Work.Title, status_kind_fmt, conf.Credentials.AnnictUsername, data[i].Status.Kind))
+				texts = append(texts, fmt.Sprintf("%s の視聴ステータスを「%s」にしました https://annict.com/@%s/%s", data[i].Work.Title, status_kind_fmt, conf.Credentials.AnnictUsername, data[i].Status.Kind))
 			}
 		}
 	}
