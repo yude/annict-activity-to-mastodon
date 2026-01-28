@@ -5,6 +5,7 @@ import "time"
 type CredentialsConfig struct {
 	AnnictCredentials   `toml:"annict"`
 	MastodonCredentials `toml:"mastodon"`
+	MisskeyCredentials  `toml:"misskey"`
 }
 
 type AnnictCredentials struct {
@@ -15,6 +16,11 @@ type AnnictCredentials struct {
 type MastodonCredentials struct {
 	MastodonUrl   string `toml:"domain"`
 	MastodonToken string `toml:"access_token"`
+}
+
+type MisskeyCredentials struct {
+	MisskeyUrl   string `toml:"domain"`
+	MisskeyToken string `toml:"access_token"`
 }
 
 type Config struct {

@@ -1,6 +1,6 @@
 # annict-activity-to-mastodon
 
-Annict のアクティビティを Mastodon に投稿するボット
+Annict のアクティビティを Mastodon / Misskey に投稿するボット
 
 ## License
 

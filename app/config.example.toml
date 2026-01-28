@@ -5,3 +5,7 @@ username = ""
 [credentials.mastodon]
 domain = "https://mastodon.social"
 access_token = ""
+
+[credentials.misskey]
+domain = "https://misskey.y2e.org"
+access_token = ""
