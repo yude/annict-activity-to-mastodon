@@ -12,7 +12,7 @@ func fetch_annict() (*AnnictActivity, error) {
 	// Parse config.toml
 	conf := GetConfig()
 
-	url := "https://api.annict.com/v1/activities?access_token=" + conf.Credentials.AnnictCredentials.AnnictKey + "&sort_id=desc&filter_username=" + conf.Credentials.AnnictCredentials.AnnictUsername + "&per_page=10"
+	url := "https://api.annict.com/v1/activities?access_token=" + conf.Credentials.AnnictCredentials.AnnictKey + "&sort_id=desc&filter_username=" + conf.Credentials.AnnictCredentials.AnnictUsername + "&per_page=30"
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -43,7 +43,19 @@ func format_data(data []AnnictActivityBody) []string {
 
 	for i := 0; i < len(data); i++ {
 		if data[i].Action == "create_record" {
-			texts = append(texts, fmt.Sprintf("%s %s を見ました https://annict.com/@%s/records #%s", data[i].Work.Title, data[i].Episode.NumberText, conf.Credentials.AnnictUsername, data[i].Work.TwitterHashtag))
+			texts = append(texts,
+				fmt.Sprintf(
+					"%s %s「%s」 を見ました https://annict.com/@%s/records",
+					data[i].Work.Title,
+					data[i].Episode.NumberText,
+					data[i].Episode.Title,
+					conf.Credentials.AnnictUsername,
+					data[i].Record.ID,
+				),
+			)
+			if data[i].Work.TwitterHashtag != "" {
+				texts[len(texts)-1] += " #" + data[i].Work.TwitterHashtag
+			}
 		}
 
 		if data[i].Action == "create_status" {
