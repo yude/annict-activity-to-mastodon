@@ -50,7 +50,6 @@ func format_data(data []AnnictActivityBody) []string {
 					data[i].Episode.NumberText,
 					data[i].Episode.Title,
 					conf.Credentials.AnnictUsername,
-					data[i].Record.ID,
 				),
 			)
 			if data[i].Work.TwitterHashtag != "" {
