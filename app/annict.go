@@ -43,15 +43,26 @@ func format_data(data []AnnictActivityBody) []string {
 
 	for i := 0; i < len(data); i++ {
 		if data[i].Action == "create_record" {
-			texts = append(texts,
-				fmt.Sprintf(
-					"%s %s「%s」 を見ました https://annict.com/@%s/records",
-					data[i].Work.Title,
-					data[i].Episode.NumberText,
-					data[i].Episode.Title,
-					conf.Credentials.AnnictUsername,
-				),
-			)
+			if data[i].Episode.Title == "" {
+				texts = append(texts,
+					fmt.Sprintf(
+						"%s %s を見ました https://annict.com/@%s/records",
+						data[i].Work.Title,
+						data[i].Episode.NumberText,
+						conf.Credentials.AnnictUsername,
+					),
+				)
+			} else {
+				texts = append(texts,
+					fmt.Sprintf(
+						"%s %s「%s」 を見ました https://annict.com/@%s/records",
+						data[i].Work.Title,
+						data[i].Episode.NumberText,
+						data[i].Episode.Title,
+						conf.Credentials.AnnictUsername,
+					),
+				)
+			}
 			if data[i].Work.TwitterHashtag != "" {
 				texts[len(texts)-1] += " #" + data[i].Work.TwitterHashtag
 			}
